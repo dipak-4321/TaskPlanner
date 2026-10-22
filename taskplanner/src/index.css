@@ -1,1 +1,23 @@
 @import "tailwindcss";
+/* Container scrollbar width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Scrollbar Track (the background) */
+::-webkit-scrollbar-track {
+  background: #b6bfd2; /* Dark charcoal */
+  border-radius: 10px;
+}
+
+/* Scrollbar Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff007f, #7928ca, #00dfd8);
+  border-radius: 10px;
+  border: 1px solid #97bea3; /* Gives a padding effect around the gradient */
+}
+
+/* Subtle change on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff3399, #9446ed, #33ebe5);
+}

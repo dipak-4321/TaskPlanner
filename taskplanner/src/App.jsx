@@ -8,11 +8,11 @@ const App = () => {
     <div className='bg-green-100 h-screen relative'>
       <nav className='h-[60px] bg-amber-300 top-0 fixed w-full'></nav>
 
-      <section className='h-[calc(100%-120px)]  fixed top-[60px] w-full bg-fuchsia-300 grid grid-cols-3 gap-3 p-4 overflow-hidden'>
-        <div className='overflow-auto overflow-x-hidden '>
+      <section className='h-[calc(100%-120px)]  fixed top-[60px] w-full bg-fuchsia-300 grid grid-cols-3 gap-3 p-4 overflow-auto'>
+        <div className='h-full min-h-0 '>
           <Badge.Ribbon text="love you" className='!bg-pink-600'/>
 
-          <div className=' bg-white rounded-2xl p-4 overflow-y-scroll '>
+          <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
 
             <button className='bg-blue-500 text-white hover:bg-green-700 active:scale-95 flex py-2 px-3 rounded'>
               <Plus size={25} color="#ffffff" strokeWidth={0.95} />
