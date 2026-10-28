@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Badge , Tag , Card , Select ,Modal ,Form , Input, Button } from 'antd'
 
 import { Plus } from 'lucide-react'
@@ -6,14 +6,27 @@ import { set } from '@rc-component/util'
 
 const App = () => {
   const [open, setOpen] = useState(false)
+  const [currentTime ,setCurrentTime] = useState(new Date().toLocaleTimeString())
+
   const handleClose = ()=> {
     setOpen(false)
   }
+  useEffect(()=>{
+    const  tem = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString())
+    }, 1000)
+  },[])
   return (
     <div className='bg-green-100 h-screen relative'>
-      <nav className='h-[60px] bg-amber-300 top-0 fixed w-full'></nav>
+      <nav className='h-[60px] bg-[linear-gradient(141deg,#d11bac,#aee785)] top-0 fixed w-full flex justify-between items-center rounded px-4'>
+        <div>
+          <button className='h-12 w-12 bg-[radial-gradient(circle,#14b7cd,#5832be)] text-xl font-bold rounded-full m-auto '>PL</button>
+          <span className='text-2xl'>anner</span>
+        </div>
+        <div className='text-2xl font-bold'>{currentTime}</div>
+      </nav>
 
-      <section className='h-[calc(100%-120px)]  fixed top-[60px] w-full bg-fuchsia-300 grid grid-cols-3 gap-3 p-4 overflow-auto'>
+      <section className='h-[calc(100%-120px)]  fixed top-[60px] w-full bg-[linear-gradient(54deg,#2a254a,#21fe39)] grid grid-cols-3 gap-3 p-4 overflow-auto'>
         <div className='h-full min-h-0 '>
           <Badge.Ribbon text="Highest" className='!bg-pink-600'/>
 
@@ -25,8 +38,8 @@ const App = () => {
             </button>
             
             <div className='my-3'>
-              {Array(10).fill(12).map(()=>(
-              <Card hoverable className='my-4!' >
+              {Array(10).fill(12).map((elem,idx)=>(
+              <Card hoverable className='my-4!' key={idx}>
                 <Card.Meta title="Dilwale" description="jaaneman tu khub  hai tu mera mehbub hai"/>
              
 
