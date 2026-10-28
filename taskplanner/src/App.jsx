@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import {Badge , Tag , Card , Select ,Modal ,Form , Input, Button } from 'antd'
 
 import { Plus } from 'lucide-react'
+import { set } from '@rc-component/util'
 
 const App = () => {
   const [open, setOpen] = useState(false)
+  const handleClose = ()=> {
+    setOpen(false)
+  }
   return (
     <div className='bg-green-100 h-screen relative'>
       <nav className='h-[60px] bg-amber-300 top-0 fixed w-full'></nav>
@@ -15,7 +19,7 @@ const App = () => {
 
           <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
 
-            <button className='bg-blue-500 text-white hover:bg-green-700 active:scale-95 flex py-2 px-3 rounded'>
+            <button onClick={()=>setOpen(true)} className='bg-blue-500 text-white hover:bg-green-700 active:scale-95 flex py-2 px-3 rounded'>
               <Plus size={25} color="#ffffff" strokeWidth={0.95} />
               Add Task
             </button>
@@ -66,7 +70,7 @@ const App = () => {
       </section>
 
       <footer className='h-[60px] bg-red-300 w-full absolute bottom-0'></footer>
-      <Modal open footer={null} title="Add New Task">
+      <Modal open={open} footer={null} title="Add New Task" onCancel={handleClose}>
         <Form >
           <Form.Item name='title' rules={[{required : true}]}>
             <Input placeholder='Enter task Name' size='large'/>
