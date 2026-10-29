@@ -3,12 +3,18 @@ import {Badge , Tag , Card , Select ,Modal ,Form , Input, Button, DatePicker } f
 
 import { Plus } from 'lucide-react'
 import { set } from '@rc-component/util'
+import { usePlanner } from './store/usePlanner'
 
 const App = () => {
   const [open, setOpen] = useState(false)
   const [currentTime ,setCurrentTime] = useState(new Date().toLocaleTimeString())
+  const {tasks , setTasks} = usePlanner()
   
+  const createTask = (value)=> {
+    console.log(tasks)
+    setTasks(value)
 
+  }
   const handleClose = ()=> {
     setOpen(false)
   }
@@ -47,7 +53,7 @@ const App = () => {
           <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
 
             <div className='my-3'>
-              {Array(10).fill(12).map((elem,idx)=>(
+              {tasks.filter((item)=>item.priority === 'highest').map((elem,idx)=>(
               <Card hoverable className='my-4!' key={idx}>
                 <Card.Meta title="Dilwale" description="jaaneman tu khub  hai tu mera mehbub hai"/>
              
@@ -75,19 +81,72 @@ const App = () => {
           </div>
   
         </div>
-        <div className=' h-full '>
-          <Badge.Ribbon text="Medium" className='!bg-blue-600'/>
-          <div className='h-full bg-white rounded-2xl'>
+        <div className='h-full min-h-0 my-3 lg:my-0 '>
+          <Badge.Ribbon text="Medium" className='!bg-blue-600 z-10'/>
+
+            <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
+
+              <div className='my-3'>
+                {tasks.filter((item)=>item.priority === 'medium').map((elem,idx)=>(
+                   <Card hoverable className='my-4!' key={idx}>
+                     <Card.Meta title="Dilwale" description="jaaneman tu khub  hai tu mera mehbub hai"/>
+             
+
+                      <div className='flex justify-between mt-3'>
+
+              <div className='flex gap-4'>
+                <Tag className='!flex items-center' >Pending</Tag>
+                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
+              </div>
+
+              <div>
+                <Select placeholder="change status">
+                  <Select.Option value="pending">pending</Select.Option>
+                  <Select.Option value="processing">processing</Select.Option>
+                  <Select.Option value="completed">completed</Select.Option>
+                </Select>
+              </div>
+
+              </div>
+               </Card>
+               ))}
+            </div>
 
           </div>
 
         </div>
-        <div className='h-full '>
-          <Badge.Ribbon text="Lowest" className='!bg-yellow-600'/>
-          <div className='h-full bg-white rounded-2xl'>
 
+        <div className='h-full min-h-0 my-3 lg:my-0 '>
+          <Badge.Ribbon text="Lowest" className='!bg-amber-500 z-10'/>
+
+            <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
+
+              <div className='my-3'>
+                {tasks.filter((item)=>item.priority === 'lowest').map((elem,idx)=>(
+                   <Card hoverable className='my-4!' key={idx}>
+                     <Card.Meta title="Dilwale" description="jaaneman tu khub  hai tu mera mehbub hai"/>
+             
+
+                      <div className='flex justify-between mt-3'>
+
+              <div className='flex gap-4'>
+                <Tag className='!flex items-center' >Pending</Tag>
+                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
+              </div>
+
+              <div>
+                <Select placeholder="change status">
+                  <Select.Option value="pending">pending</Select.Option>
+                  <Select.Option value="processing">processing</Select.Option>
+                  <Select.Option value="completed">completed</Select.Option>
+                </Select>
+              </div>
+
+              </div>
+               </Card>
+               ))}
+            </div>
           </div>
-
         </div>
       </section>
 
@@ -96,7 +155,7 @@ const App = () => {
         <div className='text-gray-700'>made by <span className='text-fuchsia-600 font-medium'>Dipak Sah</span></div>
       </footer>
       <Modal open={open} footer={null} title="Add New Task" onCancel={handleClose}>
-        <Form >
+        <Form onFinish={createTask}>
           <Form.Item name='title' rules={[{required : true}]}>
             <Input placeholder='Enter task Name' size='large'/>
           </Form.Item>
@@ -104,7 +163,15 @@ const App = () => {
           <Form.Item name='description' rules={[{required : true}]}>
             <Input.TextArea placeholder='Add description here ' rows={5} />
           </Form.Item>
-          
+
+          <Form.Item name='priority' rules={[{required : true}]}>
+            <Select placeholder="Select Priority">
+              <Select.Option value='highest' >highest</Select.Option>
+              <Select.Option value='medium'>medium</Select.Option>
+              <Select.Option value='lowest'>lowest</Select.Option>
+            </Select>
+          </Form.Item>
+
           <Form.Item>
             <Button htmlType='submit' className='!bg-blue-500 !text-white active:scale-95!'>Submit</Button>
           </Form.Item>
