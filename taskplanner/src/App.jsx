@@ -11,7 +11,8 @@ const App = () => {
   const {tasks , setTasks} = usePlanner()
   
   const createTask = (value)=> {
-    console.log(tasks)
+    value.status = "pending"
+    console.log(value)
     setTasks(value)
 
   }
@@ -55,13 +56,13 @@ const App = () => {
             <div className='my-3'>
               {tasks.filter((item)=>item.priority === 'highest').map((elem,idx)=>(
               <Card hoverable className='my-4!' key={idx}>
-                <Card.Meta title="Dilwale" description="jaaneman tu khub  hai tu mera mehbub hai"/>
+                <Card.Meta title={elem.title} description={elem.description}/>
              
 
               <div className='flex justify-between mt-3'>
 
               <div className='flex gap-4'>
-                <Tag className='!flex items-center' >Pending</Tag>
+                <Tag className='!flex items-center' >{elem.status}</Tag>
                 <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
               </div>
 
@@ -89,13 +90,13 @@ const App = () => {
               <div className='my-3'>
                 {tasks.filter((item)=>item.priority === 'medium').map((elem,idx)=>(
                    <Card hoverable className='my-4!' key={idx}>
-                     <Card.Meta title="Dilwale" description="jaaneman tu khub  hai tu mera mehbub hai"/>
+                     <Card.Meta title={elem.title} description={elem.description}/>
              
 
                       <div className='flex justify-between mt-3'>
 
               <div className='flex gap-4'>
-                <Tag className='!flex items-center' >Pending</Tag>
+                <Tag className='!flex items-center' >{elem.status}</Tag>
                 <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
               </div>
 
@@ -124,13 +125,13 @@ const App = () => {
               <div className='my-3'>
                 {tasks.filter((item)=>item.priority === 'lowest').map((elem,idx)=>(
                    <Card hoverable className='my-4!' key={idx}>
-                     <Card.Meta title="Dilwale" description="jaaneman tu khub  hai tu mera mehbub hai"/>
+                     <Card.Meta title={elem.title} description={elem.description}/>
              
 
                       <div className='flex justify-between mt-3'>
 
               <div className='flex gap-4'>
-                <Tag className='!flex items-center' >Pending</Tag>
+                <Tag className='!flex items-center' >{elem.status}</Tag>
                 <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
               </div>
 
