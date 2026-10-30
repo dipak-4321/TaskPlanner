@@ -8,10 +8,11 @@ import { usePlanner } from './store/usePlanner'
 const App = () => {
   const [open, setOpen] = useState(false)
   const [currentTime ,setCurrentTime] = useState(new Date().toLocaleTimeString())
-  const {tasks , setTasks} = usePlanner()
+  const {tasks , setTasks , deleteTask} = usePlanner()
   
   const createTask = (value)=> {
     value.status = "pending"
+    value.id = Date.now()
     console.log(value)
     setTasks(value)
 
@@ -63,7 +64,7 @@ const App = () => {
 
               <div className='flex gap-4'>
                 <Tag className='!flex items-center' >{elem.status}</Tag>
-                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
+                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' onClick={()=>deleteTask(elem.id)}>Delete</Tag>
               </div>
 
               <div>
@@ -97,7 +98,7 @@ const App = () => {
 
               <div className='flex gap-4'>
                 <Tag className='!flex items-center' >{elem.status}</Tag>
-                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
+                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' onClick={()=>deleteTask(elem.id)}>Delete</Tag>
               </div>
 
               <div>
@@ -124,7 +125,7 @@ const App = () => {
 
               <div className='my-3'>
                 {tasks.filter((item)=>item.priority === 'lowest').map((elem,idx)=>(
-                   <Card hoverable className='my-4!' key={idx}>
+                   <Card hoverable className='my-4! ' key={idx}>
                      <Card.Meta title={elem.title} description={elem.description}/>
              
 
@@ -132,7 +133,7 @@ const App = () => {
 
               <div className='flex gap-4'>
                 <Tag className='!flex items-center' >{elem.status}</Tag>
-                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' >Delete</Tag>
+                <Tag className='!bg-rose-500 hover:bg-rose-600! active:scale-95! !text-white !flex !items-center !py-1 !px-2' onClick={()=>deleteTask(elem.id)}>Delete</Tag>
               </div>
 
               <div>
