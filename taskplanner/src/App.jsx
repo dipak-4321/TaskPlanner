@@ -32,25 +32,25 @@ const App = () => {
   return (
     <div className='bg-green-100 h-screen relative'>
       <nav className=' h-[60px] bg-[linear-gradient(141deg,#aee785,#d11bac)] top-0 fixed w-full flex justify-between items-center rounded px-7'>
-        <div>
+        <div className=''>
           {/* <div><img src="logo.jpg" alt="" /></div> */}
-          <button className='h-12 w-12 bg-[radial-gradient(circle,#14b7cd,#5832be)] text-xl font-bold rounded-full m-auto '>PL</button>
-          <span className='text-2xl'>anner</span>
+          <button className='h-12 w-12 bg-[radial-gradient(circle,#14b7cd,#5832be)] text-xl font-bold rounded-full md:m-auto '>PL</button>
+          <span className='text-2xl hidden md:block'>anner</span>
         </div>
 
         <div className='flex gap-5 items-center'>
-          <DatePicker size="large"/>
-        <div className='text-2xl font-bold'>{currentTime}</div>
-        <button onClick={()=>setOpen(true)} className='bg-blue-500 text-white hover:bg-green-700 active:scale-95 flex py-1 px-3 rounded'>
+          <DatePicker className='ml-2!' size="large"/>
+        <div className='text-2xl font-bold hidden md:block'>{currentTime}</div>
+        <button onClick={()=>setOpen(true)} className='bg-blue-500 text-white hover:bg-green-700 active:scale-95 flex py-1 px-3 rounded h-9.5 items-center '>
           <Plus size={25} color="#ffffff" strokeWidth={0.95} />
-            Add Task
+            Add <span className='ml-1.5 hidden md:block'> Task</span>
         </button>
         </div>
       </nav>
 
       <section className='h-[calc(100%-120px)]  fixed top-[60px] w-full bg-[linear-gradient(54deg,#2a254a,#21fe39)] lg:grid lg:grid-cols-3 gap-3 p-4 overflow-auto'>
         <div className='h-full min-h-0 my-3 lg:my-0 '>
-          <Badge.Ribbon text="Highest" className='!bg-pink-600 z-10'/>
+          <Badge.Ribbon text="Highest" className='!bg-[linear-gradient(188deg,#db040b,#f80bba)] z-10'/>
 
           <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
 
@@ -84,7 +84,7 @@ const App = () => {
   
         </div>
         <div className='h-full min-h-0 my-3 lg:my-0 '>
-          <Badge.Ribbon text="Medium" className='!bg-blue-600 z-10'/>
+          <Badge.Ribbon text="Medium" className='!bg-[linear-gradient(201deg,#2a378a,#6a22cc)] z-10'/>
 
             <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
 
@@ -119,7 +119,7 @@ const App = () => {
         </div>
 
         <div className='h-full min-h-0 my-3 lg:my-0 '>
-          <Badge.Ribbon text="Lowest" className='!bg-amber-500 z-10'/>
+          <Badge.Ribbon text="Lowest" className='!bg-[linear-gradient(253deg,#f7b641,#71df5e)] z-10'/>
 
             <div className=' bg-white rounded-2xl p-4 overflow-auto h-full min-h-0'>
 
@@ -153,7 +153,7 @@ const App = () => {
       </section>
 
       <footer className='h-[60px] bg-red-300 w-full absolute bottom-0 flex items-center justify-between px-5 bg-[linear-gradient(141deg,#d11bac,#aee785)]'>
-        <div className='font-bold text-3xl'>Total - 23</div>
+        <div className='font-bold text-3xl'>Total - {tasks.length}</div>
         <div className='text-gray-700'>made by <span className='text-fuchsia-600 font-medium'>Dipak Sah</span></div>
       </footer>
       <Modal open={open} footer={null} title="Add New Task" onCancel={handleClose}>
